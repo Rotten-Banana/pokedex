@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import Card from './card';
-import SearchBox from './searchbox';
-import './card.css';
+import SearchBox from '../Components/searchbox';
+import '../card.css';
+import Scroll from '../Components/scroll'
 
 
 class Pokedata extends Component {
@@ -14,9 +15,9 @@ class Pokedata extends Component {
 	}
 
 	async componentDidMount(){
-		await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=964')
-		.then(response => response.json())
-		.then(data => this.setState({ poke: data.results}));
+		const response = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=251')
+		const data = await response.json()
+		this.setState({ poke: data.results});
 	}
 
 	onSearchChange = (event) => {
@@ -30,11 +31,13 @@ class Pokedata extends Component {
 		return(
 			<div>
 				<SearchBox searchChange={this.onSearchChange}/>
+				<Scroll>
 				<div className='card'>
 					{filter.map(num => {
 						return(<Card key={num.name} name={num.name} url={num.url}/>);
 					})}
 				</div>
+				</Scroll>
 			</div>
 		);	
 	}

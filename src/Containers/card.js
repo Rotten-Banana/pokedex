@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import './card.css'
+import '../card.css'
 
 class Card extends Component{
 	constructor(){
@@ -16,16 +16,15 @@ class Card extends Component{
 	}
 
 	async componentDidMount(){
-		await fetch(this.props.url)
-		.then(response => response.json())
-		.then(data => {
-			this.setState({ height: data.height})
-			this.setState({ sprite: data.sprites.front_default})
-			this.setState({ abilities: data.abilities})
-			this.setState({ id: data.id})
-			this.setState({ baseexp: data.base_experience})
-			this.setState({ type: data.types})
-		});
+		const response = await fetch(this.props.url)
+		const data = await response.json()
+			this.setState({ height: data.height});
+			this.setState({ sprite: data.sprites.front_default});
+			this.setState({ abilities: data.abilities});
+			this.setState({ id: data.id});
+			this.setState({ baseexp: data.base_experience});
+			this.setState({ type: data.types});
+
 	}
 
 	render(){

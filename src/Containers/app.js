@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import Pokedata from './pokedata';
-import './card.css';
+import '../card.css';
 class App extends Component {
 	render(){
 		return(
